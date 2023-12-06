@@ -4,6 +4,4 @@ include 'scr/Context.php';
 
 $dbContext = new Context();
 
-echo $_ENV['POSTGRES_DB'];
-
 $dbContext->handleRequest('note', 'handleRequest');

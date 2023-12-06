@@ -1,0 +1,27 @@
+version: '3.5'
+
+services:
+  php-app:
+    container_name: php-app
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+
+  db:
+    container_name: db
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: notes_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - mynetwork
+networks:
+  mynetwork:
+    driver: bridge

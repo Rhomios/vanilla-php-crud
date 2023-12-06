@@ -9,7 +9,7 @@ class Context extends dbContext {
     private $models = [];
     private $routes = [];
     private function Connect() {
-        return new DataBaseConfiguration("localhost", "5432", "notes_db", "postgres", "postgres");
+        return new DataBaseConfiguration("db", "5432", "notes_db", "postgres", "postgres");
     }
 
     private function modelConfigurator() {
