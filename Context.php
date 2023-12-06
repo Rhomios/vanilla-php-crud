@@ -1,8 +1,8 @@
 <?php
-require_once('Note.php');
-require_once __DIR__ . '/../DataBase/DataBaseConfiguration.php';
-require __DIR__ . '/../DataBase/dbContext.php';
-require __DIR__ . '/../Routes/NotesRouter.php';
+require_once('Models/Note.php');
+require_once 'DataBase/DataBaseConfiguration.php';
+require 'DataBase/dbContext.php';
+require 'Routes/NotesRouter.php';
 
 class Context extends dbContext {
     private $models = [];

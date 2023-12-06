@@ -19,9 +19,8 @@ class NoteController
 
     public function getNoteById($id)
     {
-        $query = "SELECT * FROM note WHERE id = :id";
+        $query = "SELECT * FROM note WHERE id = $id";
         $statement = $this->pdo->prepare($query);
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
         $note = $statement->fetch(PDO::FETCH_ASSOC);
         echo json_encode($note, JSON_UNESCAPED_UNICODE);
@@ -34,7 +33,7 @@ class NoteController
         $statement->bindParam(':title', $data['title']);
         $statement->bindParam(':content', $data['content']);
         $statement->execute();
-        echo json_encode(['message' => 'Note created']);
+        echo json_encode(['message' => 'Note has been created']);
     }
 
     public function updateNote($id, $data)
@@ -45,7 +44,7 @@ class NoteController
         $statement->bindParam(':content', $data['content']);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
-        echo json_encode(['message' => 'Note updated']);
+        echo json_encode(['message' => "Note with id: $id has been updated"]);
     }
 
     public function deleteNote($id)
@@ -54,6 +53,6 @@ class NoteController
         $statement = $this->pdo->prepare($query);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
-        echo json_encode(['message' => 'Note deleted']);
+        echo json_encode(['message' => "Note with id: $id has been deleted"]);
     }
 }

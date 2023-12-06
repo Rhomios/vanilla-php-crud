@@ -13,10 +13,17 @@ class dbContext {
             $attributeList = $model->getAttributes();
             foreach ($attributeList as $key => $column) {
                 if (!array_key_exists('title', $column) || !array_key_exists('type', $column)) {
-                    throw new Exception("Required params were not provided in ");
-                } else {
-                    $query .= "{$column['title']} {$column['type']}";
-                }
+                    throw new Exception("Required params were not provided in " . $model->getModelName());
+                } 
+
+                preg_match('/^[a-zA-Z_]+\b/', $column['type'], $matches);
+                $baseType = $matches[0] ?? null;
+                
+                if (!$baseType && !in_array($column['type'], SQL_DATA_TYPES)) {
+                    throw new Exception("Wrong data type in " . $model->getModelName() . " where column name is " . $column['title']);
+                } 
+
+                $query .= "{$column['title']} {$column['type']}";
 
                 foreach ($column as $attribute => $value) {
                     if ($attribute !== 'title' && $attribute !== 'type' && in_array($attribute, SQL_TABLE_DEF_ATTRS)) {
