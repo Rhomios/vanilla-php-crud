@@ -33,7 +33,7 @@ class NoteController
         $statement->bindParam(':title', $data['title']);
         $statement->bindParam(':content', $data['content']);
         $statement->execute();
-        echo json_encode(['message' => 'Note has been created']);
+        echo json_encode(['message' => 'Models\Note has been created']);
     }
 
     public function updateNote($id, $data)
@@ -44,7 +44,7 @@ class NoteController
         $statement->bindParam(':content', $data['content']);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
-        echo json_encode(['message' => "Note with id: $id has been updated"]);
+        echo json_encode(['message' => "Models\Note with id: $id has been updated"]);
     }
 
     public function deleteNote($id)
@@ -53,6 +53,6 @@ class NoteController
         $statement = $this->pdo->prepare($query);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->execute();
-        echo json_encode(['message' => "Note with id: $id has been deleted"]);
+        echo json_encode(['message' => "Models\Note with id: $id has been deleted"]);
     }
 }

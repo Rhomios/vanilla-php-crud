@@ -1,5 +1,6 @@
 <?php
-class DataBaseConfiguration {
+class DataBaseConfiguration
+{
     private $host;
     private $port;
     private $dbName;
@@ -7,7 +8,8 @@ class DataBaseConfiguration {
     private $dbUserPassword;
     private $pdo;
 
-    public function __construct($host, $port, $dbName, $dbUser, $dbUserPassword) {
+    public function __construct($host, $port, $dbName, $dbUser, $dbUserPassword)
+    {
         $this->host = $host;
         $this->port = $port;
         $this->dbName = $dbName;
@@ -16,7 +18,8 @@ class DataBaseConfiguration {
         $this->connect();
     }
 
-    private function connect() {
+    private function connect()
+    {
         try {
             $dsn = "pgsql:host={$this->host};port={$this->port};dbname={$this->dbName};options='--client_encoding=UTF8'";
             $this->pdo = new PDO($dsn, $this->dbUser, $this->dbUserPassword);
@@ -27,7 +30,8 @@ class DataBaseConfiguration {
         }
     }
 
-    public function getPDO() {
+    public function getPDO()
+    {
         return $this->pdo;
     }
 }

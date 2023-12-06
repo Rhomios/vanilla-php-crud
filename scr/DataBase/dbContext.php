@@ -1,8 +1,11 @@
 <?php
 require_once 'SQL_Constants.php';
-class dbContext {
 
-    public static function initDataBase($pdo, $models) {
+class dbContext
+{
+
+    public static function initDataBase($pdo, $models)
+    {
         $query = '';
         if (!is_array($models)) {
             throw new Exception('Incorrect list of models');
@@ -14,14 +17,14 @@ class dbContext {
             foreach ($attributeList as $key => $column) {
                 if (!array_key_exists('title', $column) || !array_key_exists('type', $column)) {
                     throw new Exception("Required params were not provided in " . $model->getModelName());
-                } 
+                }
 
                 preg_match('/^[a-zA-Z_]+\b/', $column['type'], $matches);
                 $baseType = $matches[0] ?? null;
-                
+
                 if (!$baseType && !in_array($column['type'], SQL_DATA_TYPES)) {
                     throw new Exception("Wrong data type in " . $model->getModelName() . " where column name is " . $column['title']);
-                } 
+                }
 
                 $query .= "{$column['title']} {$column['type']}";
 
@@ -72,7 +75,7 @@ class dbContext {
                     $query .= ',';
                 }
             }
-            if ($index !== sizeof($models) -1) {
+            if ($index !== sizeof($models) - 1) {
                 $query .= '), ';
             } else {
                 $query .= '); ';

@@ -1,5 +1,6 @@
 <?php
-require_once('Models/Note.php');
+
+require_once 'Models/Note.php';
 require_once 'DataBase/DataBaseConfiguration.php';
 require 'DataBase/dbContext.php';
 require 'Routes/NotesRouter.php';
